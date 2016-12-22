@@ -1,0 +1,48 @@
+body {
+  padding-top: 20px;
+}
+
+section.formation {
+  padding: 0;
+}
+
+section.video {
+  padding: 0;
+}
+
+canvas {
+  border: 1px solid grey;
+  position: relative;
+}
+
+.formation {
+  min-height: 350px;
+  min-width: 550px;
+}
+
+.video {
+  min-height: 350px;
+  min-width: 550px;
+}
+
+.tools {
+  min-height: 300px;
+  border: 1px solid green;
+  margin-top: 20px;
+}
+
+.yt-info {
+  margin-bottom: 20px;
+}
+
+.yt-url {
+  width: 700px;
+}
+
+.chosen {
+  color: grey;
+}
+
+.bold {
+  font-weight: bold;
+}
