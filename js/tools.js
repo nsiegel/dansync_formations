@@ -29,7 +29,7 @@ function selectDancer(e) {
     dancerLI.className = 'bold'; // add bold class to new dancer
   } else {
     assigningSpot = true;
-    dancerLI = e.path[0]; // assign selected dancer
+    dancerLI = e.target || e.srcElement;; // assign selected dancer
     dancerLI.className = 'bold'; // add bold class
   }
 }
