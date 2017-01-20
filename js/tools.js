@@ -25,11 +25,11 @@ function selectDancer(e) {
   // if we are currently assigning a spot
   if (assigningSpot === true) {
     dancerLI.className = ''; // remove bold class from prev dancer
-    dancerLI = e.path[0]; // reasign selected dancer
+    dancerLI = e.target || e.srcElement; // reasign selected dancer
     dancerLI.className = 'bold'; // add bold class to new dancer
   } else {
     assigningSpot = true;
-    dancerLI = e.target || e.srcElement;; // assign selected dancer
+    dancerLI = e.target || e.srcElement; // assign selected dancer
     dancerLI.className = 'bold'; // add bold class
   }
 }
