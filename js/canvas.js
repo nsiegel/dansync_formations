@@ -13,9 +13,12 @@ if (canvas.getContext){
 
 function addSpotToFormation(formation, canvas) {
   return function(e) {
+    var canv = e.target || e.srcElement;
+    var canvasWidth = canv.offsetWidth;
+    var perc = canvas.width / canvasWidth;
     if (e !== undefined) {
-      x = e.offsetX;
-      y = e.offsetY;
+      x = e.offsetX * perc;
+      y = e.offsetY * perc;
     }
     if (!dancerLI) { return; }
     var name = dancerLI.innerText;

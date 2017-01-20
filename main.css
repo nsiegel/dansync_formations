@@ -13,11 +13,13 @@ section.video {
 canvas {
   border: 1px solid grey;
   position: relative;
+  width: 100%;
+  height: auto;
 }
 
 .formation {
-  min-height: 350px;
-  min-width: 550px;
+  max-width: 1140px;
+  min-width: 290px;
 }
 
 .video {
