@@ -14,10 +14,8 @@ function addDancer() {
     return alert('You already entered a dancer with this name.');
   }
   dancerList[name] = null;
-  var node = document.createElement('li');
   var text = document.createTextNode(name);
-  node.appendChild(text);
-  dancerUL.appendChild(node);
+  appendToList(dancerUL, text);
 }
 
 function selectDancer(e) {
@@ -48,7 +46,26 @@ function saveSpots() {
   // add image to html
   var img = new Image(250);
   img.src = dataURL;
-  var node = document.createElement('li');
-  node.appendChild(img);
-  formationImages.appendChild(node);
+  appendToList(formationImages, img)
+}
+
+
+function getLIindex(node) {
+  var index = 0
+  var li = node;
+  while (li.nodeName !== 'LI') {
+    li = li.parentNode;
+  }
+  while (li.previousSibling !== null) {
+    li = li.previousSibling;
+    index++;
+  }
+  return index;
+}
+
+function appendToList(list, data) {
+  var li = document.createElement('li');
+  li.appendChild(data);
+  list.appendChild(li);
+
 }
