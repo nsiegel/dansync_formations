@@ -2,7 +2,6 @@ var dancerUL = document.getElementById('dancer-list');
 var formationImages = document.getElementById('formation-images');
 var assigningSpot = false;
 var dancerLI = null; // dancer list element currently selected
-// var spots = {}; // all saved dancer spots
 var dancerList = {}; // dancer spots before it's officially saved
 
 document.getElementById('add-dancer').onclick = addDancer;
@@ -36,11 +35,9 @@ function selectDancer(e) {
 
 function saveSpots() {
   var dataURL = graphics.canvas.toDataURL();
-  formation.image = dataURL;
-
-  formation_timeline.addFormation(formation);
-  formation = new Formation(dancerList);
-  console.log(formation_timeline);
+  currentFormation.setImage(dataURL);
+  formationTimeline.addFormation(currentFormation);
+  currentFormation = new Formation(dancerList);
 
   // add image to html
   var img = new Image(250);

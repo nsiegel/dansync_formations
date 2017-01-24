@@ -1,29 +1,22 @@
 var canvas = document.getElementById('canvas');
 
 if (canvas.getContext){
-  window.graphics = new Graphics(canvas);
-  window.formation = new Formation(dancerList);
-  window.formation_timeline = new FormationTimeline();
+  var graphics = new Graphics(canvas);
+  var currentFormation = new Formation(dancerList);
+  var formationTimeline = new FormationTimeline();
   graphics.init();
-  document.getElementById('save-pdf').onclick = formation_timeline.savePDF.bind(formation_timeline);
-  canvas.onclick = addSpotToFormation(formation, graphics);
+  document.getElementById('save-pdf').onclick = formationTimeline.savePDF.bind(formationTimeline);
+  canvas.onclick = addSpotToFormation;
 } else {
   console.log('Canvas not supported');
 }
 
-function addSpotToFormation(formation, canvas) {
-  return function(e) {
-    var canv = e.target || e.srcElement;
-    var canvasWidth = canv.offsetWidth;
-    var perc = canvas.width / canvasWidth;
-    if (e !== undefined) {
-      x = e.offsetX * perc;
-      y = e.offsetY * perc;
-    }
-    if (!dancerLI) { return; }
-    var name = dancerLI.innerText;
+function addSpotToFormation(e) {
+  if (!dancerLI) { return; }
+  var name = dancerLI.innerText;
+  var canvas = e.target || e.srcElement;
+  var coordinates = graphics.convertSize(e.offsetX, e.offsetY, canvas.offsetWidth);
 
-    formation.addSpot(x, y, name);
-    graphics.drawFormation(formation.spots);
-  };
+  currentFormation.addSpot(coordinates[0], coordinates[1], name);
+  graphics.drawFormation(currentFormation.spots);
 }

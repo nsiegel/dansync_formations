@@ -31,7 +31,16 @@ Formation.prototype = {
       return removed;
     }
   },
-  addTime: function(time) {
+  moveSpot: function(x, y, name) {
+    if (this.dancers[name] !== null) {
+      var i = this.dancers[name];
+      this.spots[i].move(x, y);
+    }
+  },
+  setTime: function(time) {
     this.time = time;
+  },
+  setImage: function(imgData) {
+    this.image = imgData;
   }
 };

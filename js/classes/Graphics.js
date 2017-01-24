@@ -54,5 +54,11 @@ Graphics.prototype = {
       var spot = formation[i];
       this.drawSpot(spot.x, spot.y, spot.name);
     }
+  },
+  convertSize: function(x, y, canvasWidth) {
+    var perc = this.width / canvasWidth;
+    x = x * perc;
+    y = y * perc;
+    return[x, y];
   }
 };
