@@ -21,15 +21,21 @@ function addDancer() {
 }
 
 function selectDancer(e) {
-  // if we are currently assigning a spot
+  var li = e.target || e.srcElement;
+
   if (assigningSpot === true) {
-    dancerLI.className = ''; // remove bold class from prev dancer
-    dancerLI = e.target || e.srcElement; // reasign selected dancer
-    dancerLI.className = 'bold'; // add bold class to new dancer
+    dancerLI.className = '';
+    if (dancerLI === li) {
+      dancerLI = null;
+      assigningSpot = false;
+    } else {
+      dancerLI = li;
+      dancerLI.className = 'bold';
+    }
   } else {
     assigningSpot = true;
-    dancerLI = e.target || e.srcElement; // assign selected dancer
-    dancerLI.className = 'bold'; // add bold class
+    dancerLI = li;
+    dancerLI.className = 'bold';
   }
 }
 
