@@ -10,7 +10,7 @@ document.getElementById('save-spots').onclick = saveSpots;
 
 function addDancer() {
   var name = document.getElementById('name').value;
-  if (dancerList[name]) {
+  if (dancerList[name] !== undefined) {
     return alert('You already entered a dancer with this name.');
   }
   dancerList[name] = null;
