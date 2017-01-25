@@ -4,8 +4,12 @@ var FormationTimeline = function() {
 };
 
 FormationTimeline.prototype = {
-  addFormation: function(formation) {
-    this.formations.push(formation);
+  addFormation: function(formation, i) {
+    if (i === null) {
+      this.formations.push(formation);
+    } else {
+      this.formations[i] = formation;
+    }
   },
   next: function() {
     // uses cursor

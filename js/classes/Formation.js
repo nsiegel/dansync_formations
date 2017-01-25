@@ -1,7 +1,7 @@
 var Formation = function(dancers) {
   this.spots = [];
   this.time = null;
-  this.dancers = dancers;
+  this.dancers = dancers || null;
   this.image = null;
 };
 
@@ -42,5 +42,16 @@ Formation.prototype = {
   },
   setImage: function(imgData) {
     this.image = imgData;
+  },
+  copyInfo: function(formation) {
+    this.time = formation.time;
+    this.image = formation.image;
+    if (this.dancers === null) {
+      this.dancers = formation.dancers;
+    }
+    for (var i = 0; i < formation.spots.length; i++) {
+      var spot = formation.spots[i];
+      this.addSpot(spot.x, spot.y, spot.name);
+    }
   }
 };
