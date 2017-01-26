@@ -50,6 +50,8 @@ function saveSpots() {
   var img = new Image(250);
   img.src = dataURL;
   appendToList(formationImages, img, formationIndex)
+
+  graphics.drawFormation(currentFormation.spots);
 }
 
 function editFormation(e) {
