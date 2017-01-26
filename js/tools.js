@@ -49,8 +49,8 @@ function saveSpots() {
   // add image to html
   var img = new Image(250);
   img.src = dataURL;
-  appendToList(formationImages, img, formationIndex)
-
+  appendToList(formationImages, img, formationIndex);
+  formationIndex = null;
   graphics.drawFormation(currentFormation.spots);
 }
 
