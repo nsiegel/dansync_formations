@@ -1,5 +1,6 @@
 var FormationTimeline = function() {
   this.formations = [];
+  this.transitions = [];
   this.cursor = 0;
 };
 
@@ -12,7 +13,6 @@ FormationTimeline.prototype = {
     }
   },
   next: function() {
-    // uses cursor
     var currentFormation = this.formations[this.cursor];
     this.cursor++;
     return currentFormation;
