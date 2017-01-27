@@ -16,7 +16,7 @@ function addDancer() {
     return alert('You already entered a dancer with this name.');
   }
   dancerList[name] = null;
-  currentFormation.dancers = dancerList;
+  currentFormation.dancers[name] = null;
   var text = document.createTextNode(name);
   appendToList(dancerUL, text);
 }

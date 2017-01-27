@@ -1,8 +1,12 @@
 var Formation = function(dancers) {
   this.spots = [];
   this.time = null;
-  this.dancers = dancers || null;
+  this.dancers = {};
   this.image = null;
+
+  for (var dancer in dancers) {
+    this.dancers[dancer] = dancers[dancer];
+  }
 };
 
 Formation.prototype = {
