@@ -15,7 +15,7 @@ Formation.prototype = {
     // if the dancers spot was already assigned
     // change the coordinates of the spot
     // otherwise save the index of the dancers spot
-    if (this.dancers[name] !== null) {
+    if (this.dancers[name] !== null && this.dancers[name] !== undefined) {
       var i = this.dancers[name];
       this.spots[i] = spot;
     } else {
