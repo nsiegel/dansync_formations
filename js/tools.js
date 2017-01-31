@@ -10,8 +10,10 @@ dancerUL.onclick = selectDancer;
 document.getElementById('save-spots').onclick = saveSpots;
 formationImages.onclick = editFormation;
 
-function addDancer() {
-  var name = document.getElementById('name').value;
+function addDancer(name) {
+  if (name === undefined) {
+    name = document.getElementById('name').value;
+  }
   if (dancerList[name] !== undefined) {
     return alert('You already entered a dancer with this name.');
   }
