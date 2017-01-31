@@ -2,6 +2,7 @@ var FormationTimeline = function() {
   this.formations = [];
   this.transitions = [];
   this.cursor = 0;
+  this.time = null;
   this.video = null;
 };
 
@@ -34,6 +35,9 @@ FormationTimeline.prototype = {
       y += height + 25;
     }
     pdf.save('download.pdf');
+  },
+  addTime: function(time) {
+    this.time = time;
   },
   setVideo: function(videoUrl) {
     this.video = videoUrl;
