@@ -14,6 +14,7 @@ var videoId;
 function getVideo() {
   var url = document.getElementById('yt-url').value;
   video = new Video(url);
+  formationTimeline.setVideo(video);
   return video.player;
 }
 
