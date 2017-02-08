@@ -11,7 +11,7 @@ document.getElementById('save-spots').onclick = saveSpots;
 formationImages.onclick = editFormation;
 
 function addDancer(name) {
-  if (name === undefined) {
+  if (typeof name !== 'string') {
     name = document.getElementById('name').value;
   }
   if (dancerList[name] !== undefined) {
