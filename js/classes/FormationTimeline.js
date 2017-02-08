@@ -41,5 +41,12 @@ FormationTimeline.prototype = {
   },
   setVideo: function(videoUrl) {
     this.video = videoUrl;
+  },
+  addTransition: function(transition, i) {
+    if (i) {
+      this.transitions[i] = transition;
+    } else {
+      this.transitions.push(transition);
+    }
   }
 };
