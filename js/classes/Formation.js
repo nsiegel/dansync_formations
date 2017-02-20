@@ -1,6 +1,6 @@
 var Formation = function(dancers) {
   this.spots = [];
-  this.time = null;
+  this.time = [null, null];
   this.dancers = {};
   this.image = null;
 
@@ -41,8 +41,10 @@ Formation.prototype = {
       this.spots[i].move(x, y);
     }
   },
-  setTime: function(time) {
-    this.time = time;
+  setTime: function(time, startOrEnd) {
+    if (time instanceof Array) { this.time = time; }
+    else if (startOrEnd === 'start') { this.time[0] = time; }
+    else if (startOrEnd === 'end') { this.time[1] = time; }
   },
   setImage: function(imgData) {
     this.image = imgData;
