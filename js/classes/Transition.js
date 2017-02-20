@@ -2,7 +2,7 @@ var Transition = function(formation1, formation2) {
   this.spots = [];
   this.dancers = {}
   this.time = null;
-  this.fps = 20;
+  this.fps = 60;
 
   this.setTime(formation1.time, formation2.time);
   this.makeDancerObj(formation1, formation2);
