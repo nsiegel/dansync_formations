@@ -13,6 +13,9 @@ Video.prototype = {
       videoId: this.id
     });
   },
+  playVideo: function() {
+    this.player.playVideo();
+  },
   getVideoId: function(url) {
     var id = '';
     url = url.replace(/(>|<)/gi,'').split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
@@ -23,5 +26,10 @@ Video.prototype = {
       id = url;
     }
     return id;
-  }
+  },
+  getCurrentTime: function() {
+    // returns current time in ms
+    var time = this.player.getCurrentTime();
+    return time.toFixed(2) * 1000;
+  },
 }
