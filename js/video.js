@@ -7,6 +7,7 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 var video;
 
 document.getElementById('get-video').onclick = getVideo;
+document.getElementById('play-dance').onclick = playDance;
 document.getElementById('start-time').onclick = setTime('start');
 document.getElementById('end-time').onclick = setTime('end');
 
@@ -22,6 +23,12 @@ function getVideo() {
 function getCurrentTime() {
   var time = video.getCurrentTime();
   return time;
+}
+
+function playDance() {
+  video.playVideo();
+  var loop = new Loop();
+  loop.run(graphics, formationTimeline);
 }
 
 function setTime(startOrEnd) {

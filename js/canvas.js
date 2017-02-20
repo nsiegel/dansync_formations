@@ -4,6 +4,7 @@ if (canvas.getContext){
   var graphics = new Graphics(canvas);
   var currentFormation = new Formation(dancerList);
   var formationTimeline = new FormationTimeline();
+  var loop = new Loop();
   graphics.init();
   document.getElementById('save-pdf').onclick = formationTimeline.savePDF.bind(formationTimeline);
   canvas.onclick = addSpotToFormation;
