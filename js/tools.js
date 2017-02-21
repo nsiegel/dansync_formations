@@ -18,7 +18,7 @@ function addDancer(name) {
     return alert('You already entered a dancer with this name.');
   }
   dancerList[name] = null;
-  currentFormation.dancers[name] = null;
+  CURRENT_FORMATION.dancers[name] = null;
   var text = document.createTextNode(name);
   appendToList(dancerUL, text);
 }
@@ -43,32 +43,32 @@ function selectDancer(e) {
 }
 
 function saveSpots() {
-  var dataURL = graphics.canvas.toDataURL();
-  currentFormation.setImage(dataURL);
-  formationTimeline.addFormation(currentFormation, formationIndex);
-  currentFormation = new Formation(dancerList);
+  var dataURL = GRAPHICS.canvas.toDataURL();
+  CURRENT_FORMATION.setImage(dataURL);
+  FORMATION_TIMELINE.addFormation(CURRENT_FORMATION, formationIndex);
+  CURRENT_FORMATION = new Formation(dancerList);
 
   // add image to html
   var img = new Image(250);
   img.src = dataURL;
   appendToList(formationImages, img, formationIndex);
   formationIndex = null;
-  graphics.drawFormation(currentFormation.spots);
+  GRAPHICS.drawFormation(CURRENT_FORMATION.spots);
 }
 
 function editFormation(e) {
   var node = e.target || e.srcElement;
   var i = getLIindex(node);
-  currentFormation = new Formation(dancerList);
+  CURRENT_FORMATION = new Formation(dancerList);
 
   if (i === formationIndex) {
     formationIndex = null;
   } else {
     formationIndex = i;
-    var form = formationTimeline.formations[i];
-    currentFormation.copyInfo(form);
+    var form = FORMATION_TIMELINE.formations[i];
+    CURRENT_FORMATION.copyInfo(form);
   }
-  graphics.drawFormation(currentFormation.spots);
+  GRAPHICS.drawFormation(CURRENT_FORMATION.spots);
 }
 
 function getLIindex(node) {
