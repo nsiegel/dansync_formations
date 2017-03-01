@@ -57,6 +57,7 @@ Transition.prototype = {
     }
   },
   run: function(canvas) {
+    // TODO: figure out when this broke!
     var numSpots = this.spots.length;
     var i = 0;
     var self = this;

@@ -1,102 +1,125 @@
-var dancerUL = document.getElementById('dancer-list');
-var formationImages = document.getElementById('formation-images');
-var assigningSpot = false;
-var formationIndex = null;
-var dancerLI = null; // dancer list element currently selected
-var dancerList = {};
+var UTILS = function(list) {
+  return {
+    getLIindex: function(node) {
+      var index = 0
+      var li = node;
+      while (li.nodeName !== 'LI') {
+        li = li.parentNode;
+      }
+      while (li.previousSibling !== null) {
+        li = li.previousSibling;
+        index++;
+      }
+      return index;
+    },
+    appendLI: function(data) {
+      var content = data.content;
+      var i = data.index;
+      var li = undefined;
+      var style = undefined;
+      if (data.style !== undefined) { style = data.style; }
 
-document.getElementById('add-dancer').onclick = addDancer;
-dancerUL.onclick = selectDancer;
-document.getElementById('save-spots').onclick = saveSpots;
-formationImages.onclick = editFormation;
-
-function addDancer(name) {
-  if (typeof name !== 'string') {
-    name = document.getElementById('name').value;
-  }
-  if (dancerList[name] !== undefined) {
-    return alert('You already entered a dancer with this name.');
-  }
-  dancerList[name] = null;
-  CURRENT_FORMATION.dancers[name] = null;
-  var text = document.createTextNode(name);
-  appendToList(dancerUL, text);
-}
-
-function selectDancer(e) {
-  var li = e.target || e.srcElement;
-
-  if (assigningSpot === true) {
-    dancerLI.className = '';
-    if (dancerLI === li) {
-      dancerLI = null;
-      assigningSpot = false;
-    } else {
-      dancerLI = li;
-      dancerLI.className = 'bold';
+      if (i === null || i === undefined) {
+        li = document.createElement('li');
+        li.appendChild(content);
+        if (style !== undefined) { li.className = style; }
+        list.appendChild(li);
+      } else {
+        li = list.childNodes[i];
+        li.childNodes[0].src = content.src;
+      }
     }
-  } else {
-    assigningSpot = true;
-    dancerLI = li;
-    dancerLI.className = 'bold';
   }
-}
+};
 
-function saveSpots() {
-  var dataURL = GRAPHICS.canvas.toDataURL();
-  CURRENT_FORMATION.setImage(dataURL);
-  FORMATION_TIMELINE.addFormation(CURRENT_FORMATION, formationIndex);
-  CURRENT_FORMATION = new Formation(dancerList);
+var DANCER_UTILS = (function() {
+  var dancerUL = document.getElementById('dancer-list');
+  var that = UTILS(dancerUL);
+  var assigningSpot = false;
 
-  // add image to html
-  var img = new Image(250);
-  img.src = dataURL;
-  appendToList(formationImages, img, formationIndex);
-  formationIndex = null;
-  GRAPHICS.drawFormation(CURRENT_FORMATION.spots);
-}
+  that.list = {};
+  that.selected = undefined;
+  that.selectDancer = function(e) {
+    var li = e.target || e.srcElement;
 
-function editFormation(e) {
-  var node = e.target || e.srcElement;
-  var i = getLIindex(node);
-  CURRENT_FORMATION = new Formation(dancerList);
+    if (assigningSpot === true) {
+      that.selected.className = '';
+      if (that.selected === li) {
+        that.selected = undefined;
+        assigningSpot = false;
+      } else {
+        that.selected = li;
+        that.selected.className = 'bold';
+      }
+    } else {
+      assigningSpot = true;
+      that.selected = li;
+      that.selected.className = 'bold';
+    }
+  }
+  that.addDancer = function(name) {
+    if (typeof name !== 'string') {
+      name = document.getElementById('name').value;
+    }
+    if (that.list[name] !== undefined) {
+      return alert('You already entered a dancer with this name.');
+    }
+    that.list[name] = undefined;
+    DANCE.currentFormation.dancers[name] = null;
+    var text = document.createTextNode(name);
+    that.appendLI({ content:text, style:'list-group-item' });
+  }
 
-  if (i === formationIndex) {
+  dancerUL.onclick = that.selectDancer;
+  document.getElementById('add-dancer').onclick = that.addDancer;
+
+  return that;
+}());
+
+var FORMATION_UTILS = (function() {
+  var formationImages = document.getElementById('formation-images');
+  var that = UTILS(formationImages);
+  var formationIndex = null;
+
+  that.saveSpots = function() {
+    var dataURL = DANCE.graphics.canvas.toDataURL();
+    DANCE.currentFormation.setImage(dataURL);
+    DANCE.formationTimeline.addFormation(DANCE.currentFormation, formationIndex);
+    DANCE.currentFormation = new Formation(DANCER_UTILS.list);
+
+    // add image to html
+    var img = new Image(250);
+    img.src = dataURL;
+    that.appendLI({ content:img, index:formationIndex});
     formationIndex = null;
-  } else {
-    formationIndex = i;
-    var form = FORMATION_TIMELINE.formations[i];
-    CURRENT_FORMATION.copyInfo(form);
-  }
-  GRAPHICS.drawFormation(CURRENT_FORMATION.spots);
-}
+    DANCE.graphics.drawFormation(DANCE.currentFormation.spots);
+  };
+  that.editFormation = function(e) {
+    var node = e.target || e.srcElement;
+    var i = that.getLIindex(node);
+    DANCE.currentFormation = new Formation(DANCER_UTILS.list);
 
-function getLIindex(node) {
-  var index = 0
-  var li = node;
-  while (li.nodeName !== 'LI') {
-    li = li.parentNode;
-  }
-  while (li.previousSibling !== null) {
-    li = li.previousSibling;
-    index++;
-  }
-  return index;
-}
+    if (i === formationIndex) {
+      formationIndex = null;
+    } else {
+      formationIndex = i;
+      var form = DANCE.formationTimeline.formations[i];
+      DANCE.currentFormation.copyInfo(form);
+    }
+    DANCE.graphics.drawFormation(DANCE.currentFormation.spots);
+  };
+  that.addSpot = function(e) {
+    if (!DANCER_UTILS.selected) { return; }
+    var name = DANCER_UTILS.selected.innerText;
+    var canvas = e.target || e.srcElement;
+    var coordinates = DANCE.graphics.convertSize(e.offsetX, e.offsetY, canvas.offsetWidth);
 
-function goToListIndex(list, i) {
-  return list.childNodes[i];
-}
-
-function appendToList(list, data, i) {
-  var li = null;
-  if (i === null || i === undefined) {
-    li = document.createElement('li');
-    li.appendChild(data);
-    list.appendChild(li);
-  } else {
-    li = goToListIndex(list, i);
-    li.childNodes[0].src = data.src;
+    DANCE.currentFormation.addSpot(coordinates[0], coordinates[1], name);
+    DANCE.graphics.drawFormation(DANCE.currentFormation.spots);
   }
 
-}
+  formationImages.onclick = that.editFormation;
+  document.getElementById('save-spots').onclick = that.saveSpots;
+
+  return that;
+}());
