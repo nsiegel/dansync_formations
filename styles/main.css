@@ -1,0 +1,71 @@
+html, body {
+  height: 100%; }
+
+.main {
+  margin-left: 280px; }
+
+.hide {
+  display: hidden; }
+
+section.formation-sidebar {
+  border-right: 1px solid #f2f2f2;
+  width: 280px;
+  height: 100%;
+  position: fixed;
+  overflow: auto;
+  padding: 15px 30px;
+  background-color: #f7f7f7; }
+  section.formation-sidebar .empty-message {
+    color: #ccc;
+    text-align: center;
+    line-height: 1.5em;
+    font-weight: 300; }
+  section.formation-sidebar .formation-images {
+    margin-top: 25px;
+    list-style: none;
+    padding-left: 0; }
+    section.formation-sidebar .formation-images li img {
+      max-width: 100%;
+      border: 1px solid #e0e0e0;
+      margin: 10px 0; }
+
+section.formation {
+  padding: 15px 50px; }
+  section.formation .canvas-container {
+    margin: 0 auto;
+    max-width: 1140px;
+    min-width: 290px; }
+    section.formation .canvas-container canvas {
+      margin-top: 25px;
+      border: 1px solid #f2f2f2;
+      position: relative;
+      width: 100%;
+      height: auto; }
+
+section.dancers {
+  height: 100%;
+  padding: 15px; }
+  section.dancers .dancer-list {
+    margin-top: 20px; }
+
+section.video {
+  min-height: 350px;
+  min-width: 550px;
+  padding: 0; }
+
+.yt-info {
+  margin-bottom: 20px; }
+
+.yt-url {
+  width: 700px; }
+
+.tools {
+  min-height: 300px;
+  border: 1px solid green;
+  margin-top: 20px;
+  display: none; }
+
+.bold {
+  font-weight: bold; }
+
+/*# sourceMappingURL=main.css.map */

@@ -9,7 +9,7 @@
       integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
       crossorigin="anonymous">
 
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="styles/main.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
@@ -28,51 +28,54 @@
     <script src="js/classes/Loop.js" defer></script>
 
     <script src="js/tools.js" defer></script>
-    <script src="js/video.js" defer></script>
+    <!-- <script src="js/video.js" defer></script> -->
     <script src="js/canvas.js" defer></script>
   </head>
   <body>
-    <div class="container">
-      <section id="main" class="main">
 
-        <section class="yt-info">
-          <label for="yt-url">Enter YouTube URL</label>
-          <input id="yt-url" name="yt-url" class="yt-url">
-          <button id="get-video" type="button" name="button">Load Video</button>
-        </section>
+    <section id="formation-sidebar" class="formation-sidebar">
+      <button id="save-pdf" class="save-pdf btn btn-default btn-lg btn-block" type="button" name="button">Save PDF</button>
+      <h3 id="empty-message" class="empty-message">You dont currently have any saved formations</h3>
+      <ol id="formation-images" class="formation-images"></ol>
+    </section>
 
-        <section id="formation" class="col-md-6 formation">
-          <button id="save-spots" type="button" name="button">Save Spots</button>
+    <section class="main">
+      <section id="formation" class="col-xs-9 formation">
+        <button id="save-spots" class="save-spots btn btn-primary btn-lg btn-block" type="button" name="button">Save Spots</button>
+        <div class="canvas-container">
           <canvas id="canvas" width="1140" height="696"></canvas>
-        </section>
-
-        <section id="video" class="col-md-6 video">
-          <button id="play-dance" type="button" name="button">Play Video With Spots</button>
-          <button id="start-time" type="button" name="start-time">Set Start Time</button>
-          <button id="end-time" type="button" name="end-time">Set End Time</button>
-          <div id="ytplayer" class="ytplayer"></div>
-        </section>
-
-        <section id="tools" class="col-xs-12 tools">
-
-          <section class="col-md-5">
-            <div class="">
-              <label for="name">Enter Dancer Name</label>
-              <input id="name" name="name" class="name">
-              <button id="add-dancer" type="button" name="button">Add Dancer</button>
-            </div>
-            <ul id="dancer-list" class="dancer-list"></ul>
-          </section>
-
-          <section id="saved-images" class="col-md-7">
-            <button id="save-pdf" type="button" name="button">Save PDF</button>
-            <ol id="formation-images" class="formation-images list-inline"></ol>
-          </section>
-
-        </section>
-
-
+        </div>
       </section>
-    </div>
+
+      <section id="dancers" class="col-xs-3 dancers">
+        <div class="">
+          <div class="input-group input-group-lg">
+            <input type="text" id="name" class="form-control" placeholder="Enter dancer">
+            <span class="input-group-btn">
+              <button id="add-dancer" class="btn btn-default" type="button">Add</button>
+            </span>
+          </div>
+        </div>
+
+        <div class="col-md-offset-1 col-md-10">
+          <ul id="dancer-list" class="dancer-list list-group"></ul>
+        </div>
+      </section>
+
+    </section>
+    
+    <!-- <section class="yt-info">
+      <label for="yt-url">Enter YouTube URL</label>
+      <input id="yt-url" name="yt-url" class="yt-url">
+      <button id="get-video" type="button" name="button">Load Video</button>
+    </section> -->
+
+    <!-- <section id="video" class="col-md-6 video">
+      <button id="play-dance" type="button" name="button">Play Video With Spots</button>
+      <button id="start-time" type="button" name="start-time">Set Start Time</button>
+      <button id="end-time" type="button" name="end-time">Set End Time</button>
+      <div id="ytplayer" class="ytplayer"></div>
+    </section> -->
+
   </body>
 </html>

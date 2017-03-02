@@ -43,18 +43,19 @@ var DANCER_UTILS = (function() {
     var li = e.target || e.srcElement;
 
     if (assigningSpot === true) {
-      that.selected.className = '';
+      // TODO: look over classList browser compatibility
+      that.selected.classList.remove('active');
       if (that.selected === li) {
         that.selected = undefined;
         assigningSpot = false;
       } else {
         that.selected = li;
-        that.selected.className = 'bold';
+        that.selected.classList.add('active');
       }
     } else {
       assigningSpot = true;
       that.selected = li;
-      that.selected.className = 'bold';
+      that.selected.classList.add('active');
     }
   }
   that.addDancer = function(name) {
@@ -88,9 +89,12 @@ var FORMATION_UTILS = (function() {
     DANCE.currentFormation = new Formation(DANCER_UTILS.list);
 
     // add image to html
-    var img = new Image(250);
+    var img = new Image(400);
     img.src = dataURL;
     that.appendLI({ content:img, index:formationIndex});
+    if (document.getElementById('empty-message').className !== 'hide') {
+      document.getElementById('empty-message').className = 'hide';
+    }
     formationIndex = null;
     DANCE.graphics.drawFormation(DANCE.currentFormation.spots);
   };
